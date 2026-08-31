@@ -21,4 +21,4 @@
 #   - ./gradlew build passes from a clean clone
 
 repository=https://github.com/aox-awesley/Better-Bank.git
-commit=9768147f84094a9b8d2e35ba9486dd201a94a078
+commit=2170d2d0c3079eb75cce5e0b9f6889a243424317
