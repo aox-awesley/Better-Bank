@@ -5,21 +5,28 @@ import java.util.Objects;
 /**
  * Resolves {@code (scheme, itemId)} to a category (SPEC §7 module 2).
  *
- * <p>Pure Java: no game API, no I/O, no client. Everything it needs arrives through the
- * constructor, so the whole of Better Bank's classification behaviour is testable with no
- * client running.
+ * <p>Pure Java: no game API, no I/O, no client. Runtime item facts arrive through the
+ * {@link ItemMetadata} seam, so the whole of Better Bank's classification behaviour is
+ * testable with a fake and no client running.
  *
- * <p>Resolution order is SPEC §3's, exactly:
- * user assignment &rarr; scheme rules &rarr; attribute inference &rarr; Uncategorized.
+ * <p>Resolution order:
+ * <ol>
+ *   <li>user assignment</li>
+ *   <li>scheme rules, over attributes layered as
+ *       bundled override &gt; runtime derivation &gt; name pattern
+ *       (see {@link AttributeResolver})</li>
+ *   <li>attribute inference</li>
+ *   <li>Uncategorized</li>
+ * </ol>
  */
 public final class Classifier
 {
-	private final AttributeTable table;
+	private final AttributeResolver resolver;
 	private final Assignments assignments;
 
-	public Classifier(AttributeTable table, Assignments assignments)
+	public Classifier(AttributeResolver resolver, Assignments assignments)
 	{
-		this.table = Objects.requireNonNull(table, "table");
+		this.resolver = Objects.requireNonNull(resolver, "resolver");
 		this.assignments = Objects.requireNonNull(assignments, "assignments");
 	}
 
@@ -42,9 +49,8 @@ public final class Classifier
 			return new Classification(scheme.category(assigned), Classification.Source.ASSIGNMENT);
 		}
 
-		// An item the table does not cover has no attributes to reason about. Uncategorized is
-		// the honest answer, and it is what tells us the table needs another entry.
-		final ItemAttributes attributes = table.get(itemId);
+		// Nothing known about the item at all - not even a name to match rules against.
+		final ItemAttributes attributes = resolver.resolve(itemId);
 		if (attributes == null)
 		{
 			return new Classification(scheme.uncategorized(), Classification.Source.FALLBACK);
@@ -73,5 +79,10 @@ public final class Classifier
 
 		// 4. Uncategorized, kept visible on purpose.
 		return new Classification(scheme.uncategorized(), Classification.Source.FALLBACK);
+	}
+
+	public AttributeResolver resolver()
+	{
+		return resolver;
 	}
 }

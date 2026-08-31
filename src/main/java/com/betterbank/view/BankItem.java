@@ -17,10 +17,15 @@ public final class BankItem
 	private final int canonicalId;
 	private final String name;
 	private final long stackValue;
+	private final int unitPrice;
+	private final int quantity;
 	private final boolean priced;
 
-	BankItem(Widget widget, int canonicalId, String name, long stackValue, boolean priced)
+	BankItem(Widget widget, int canonicalId, String name, long stackValue, int unitPrice,
+		int quantity, boolean priced)
 	{
+		this.unitPrice = unitPrice;
+		this.quantity = quantity;
 		this.widget = widget;
 		this.canonicalId = canonicalId;
 		this.name = name;
@@ -48,6 +53,18 @@ public final class BankItem
 	public long stackValue()
 	{
 		return stackValue;
+	}
+
+	/** Price of a single one, or 0 when the item has no price data. */
+	public int unitPrice()
+	{
+		return unitPrice;
+	}
+
+	/** How many are in this bank slot. */
+	public int quantity()
+	{
+		return quantity;
 	}
 
 	/** False for untradeables and anything else the client has no price for. */

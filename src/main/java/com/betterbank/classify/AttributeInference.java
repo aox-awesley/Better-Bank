@@ -22,6 +22,10 @@ public final class AttributeInference
 	public static List<String> candidates(ItemAttributes a)
 	{
 		final List<String> out = new ArrayList<>();
+		if (a.pet())
+		{
+			out.add("pets");
+		}
 		if (a.currency())
 		{
 			out.add("currency");

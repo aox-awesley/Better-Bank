@@ -15,12 +15,12 @@ public class SortModeTest
 	/** Builds an item without a widget; the comparator never touches one. */
 	private static BankItem priced(String name, long stackValue)
 	{
-		return new BankItem(null, 1, name, stackValue, true);
+		return new BankItem(null, 1, name, stackValue, 1, 1, true);
 	}
 
 	private static BankItem unpriced(String name)
 	{
-		return new BankItem(null, 1, name, 0L, false);
+		return new BankItem(null, 1, name, 0L, 0, 1, false);
 	}
 
 	private static List<String> sorted(SortMode mode, BankItem... items)
@@ -96,6 +96,23 @@ public class SortModeTest
 				priced("Shark", 800),
 				unpriced("Fire cape"),
 				priced("Zamorak brew", 2_000)));
+	}
+
+	@Test
+	public void cyclingSchemesVisitsEveryOneAndWraps()
+	{
+		// The in-bank switcher advances by ordinal; this pins that it reaches all seven and
+		// returns to where it started rather than running off the end.
+		final SchemeChoice[] all = SchemeChoice.values();
+		final java.util.Set<SchemeChoice> seen = new java.util.LinkedHashSet<>();
+		SchemeChoice at = all[0];
+		for (int i = 0; i < all.length; i++)
+		{
+			seen.add(at);
+			at = all[(at.ordinal() + 1) % all.length];
+		}
+		assertEquals(all.length, seen.size());
+		assertEquals("cycling should wrap to the start", all[0], at);
 	}
 
 	@Test

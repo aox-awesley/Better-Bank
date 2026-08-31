@@ -36,14 +36,16 @@ public final class ItemAttributes
 	private final boolean rune;
 	private final boolean currency;
 	private final boolean teleport;
+	private final boolean pet;
 
 	private ItemAttributes(Builder b)
 	{
 		this.name = b.name;
 		this.slot = b.slot;
+		// NOT an EnumSet: like skills, the ordering here is load-bearing (see styles()).
 		this.styles = b.styles.isEmpty()
 			? Collections.emptySet()
-			: Collections.unmodifiableSet(EnumSet.copyOf(b.styles));
+			: Collections.unmodifiableSet(new LinkedHashSet<>(b.styles));
 		// NOT an EnumSet: it would reorder these into ordinal order and the ordering here is
 		// load-bearing (see skills()).
 		this.skills = b.skills.isEmpty()
@@ -62,6 +64,7 @@ public final class ItemAttributes
 		this.rune = b.rune;
 		this.currency = b.currency;
 		this.teleport = b.teleport;
+		this.pet = b.pet;
 	}
 
 	/** Human-readable item name. Documentation only - never matched against. */
@@ -81,9 +84,21 @@ public final class ItemAttributes
 		return slot != null;
 	}
 
+	/**
+	 * Combat styles this item serves, <b>most dominant first</b>. The ordering is significant:
+	 * a scheme that splits gear by style files an item under the first of these it has a
+	 * category for, so a staff with a small crush bonus and a large magic bonus is magic gear,
+	 * not melee gear.
+	 */
 	public Set<CombatStyle> styles()
 	{
 		return styles;
+	}
+
+	/** The style this item primarily serves, or null if it serves none. */
+	public CombatStyle primaryStyle()
+	{
+		return styles.isEmpty() ? null : styles.iterator().next();
 	}
 
 	/**
@@ -162,6 +177,12 @@ public final class ItemAttributes
 		return teleport;
 	}
 
+	/** A follower pet. Untradeable, unequippable, and pure collection value. */
+	public boolean pet()
+	{
+		return pet;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -181,7 +202,7 @@ public final class ItemAttributes
 	{
 		private final String name;
 		private EquipmentSlot slot;
-		private Set<CombatStyle> styles = EnumSet.noneOf(CombatStyle.class);
+		private Set<CombatStyle> styles = new LinkedHashSet<>();
 		private Set<SkillType> skills = new LinkedHashSet<>();
 		private ConsumableClass consumable = ConsumableClass.NONE;
 		private MaterialStage material = MaterialStage.NONE;
@@ -196,6 +217,7 @@ public final class ItemAttributes
 		private boolean rune = false;
 		private boolean currency = false;
 		private boolean teleport = false;
+		private boolean pet = false;
 
 		private Builder(String name)
 		{
@@ -208,11 +230,10 @@ public final class ItemAttributes
 			return this;
 		}
 
+		/** Order is significant - most dominant style first. */
 		public Builder styles(CombatStyle... v)
 		{
-			this.styles = v.length == 0
-				? EnumSet.noneOf(CombatStyle.class)
-				: EnumSet.copyOf(Arrays.asList(v));
+			this.styles = new LinkedHashSet<>(Arrays.asList(v));
 			return this;
 		}
 
@@ -298,6 +319,12 @@ public final class ItemAttributes
 		public Builder teleport(boolean v)
 		{
 			this.teleport = v;
+			return this;
+		}
+
+		public Builder pet(boolean v)
+		{
+			this.pet = v;
 			return this;
 		}
 

@@ -4,6 +4,8 @@ import com.betterbank.BetterBankConfig;
 import com.betterbank.classify.Category;
 import com.betterbank.classify.Classifier;
 import com.betterbank.classify.Scheme;
+import com.betterbank.store.OverrideStore;
+import com.betterbank.store.SchemeCustomizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.IdentityHashMap;
@@ -14,6 +16,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.FontID;
 import net.runelite.api.ScriptID;
@@ -21,10 +24,14 @@ import net.runelite.api.events.ScriptPostFired;
 import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.gameval.VarbitID;
+import net.runelite.api.widgets.JavaScriptCallback;
 import net.runelite.api.widgets.Widget;
+import net.runelite.api.widgets.WidgetPositionMode;
 import net.runelite.api.widgets.WidgetType;
 import net.runelite.client.callback.ClientThread;
+import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
+import net.runelite.client.game.chatbox.ChatboxPanelManager;
 import net.runelite.client.plugins.bank.BankSearch;
 import net.runelite.client.plugins.banktags.tabs.TabInterface;
 
@@ -54,6 +61,19 @@ public class BankCategoryRenderer
 	private static final int START_X = 51;
 
 	private static final int HEADER_HEIGHT = 15;
+	/**
+	 * Geometry for the scheme switcher.
+	 *
+	 * <p>It lives in the empty vertical strip down the left of the bank - everything left of
+	 * where the first item column starts, which is free at every bank size. Its spot is
+	 * derived from the grid's measured bounds at layout time rather than hardcoded, so it
+	 * follows whatever the game does with that column in fixed and resizable mode.
+	 */
+	private static final int SWITCHER_ICON_SIZE = 20;
+	/** Left inset within the strip. */
+	private static final int SWITCHER_X = 6;
+	/** Clear space kept between the switcher's right edge and the item grid. */
+	private static final int SWITCHER_GRID_MARGIN = 4;
 	/** Breathing room under a category's last row, before the next header. */
 	private static final int CATEGORY_GAP = 6;
 	/** Bank title while no other plugin owns the view. */
@@ -65,6 +85,9 @@ public class BankCategoryRenderer
 	private final BankSearch bankSearch;
 	private final TabInterface tabInterface;
 	private final BetterBankConfig config;
+	private final ConfigManager configManager;
+	private final OverrideStore store;
+	private final ChatboxPanelManager chatboxPanelManager;
 
 	/** Set once the attribute table has loaded; null means "not ready, do nothing". */
 	private Classifier classifier;
@@ -83,9 +106,29 @@ public class BankCategoryRenderer
 	private final List<Widget> headers = new ArrayList<>();
 	private Widget headerParent;
 
+	/**
+	 * The in-bank scheme switcher. Our own widget, on the container core Bank Tags uses for
+	 * its own tab UI - never an action added to a game widget.
+	 */
+	/**
+	 * The items placed by the last layout, for the value tooltip to hit-test against. Volatile
+	 * because the overlay reads it from the render thread.
+	 */
+	private volatile List<BankItem> placedItems = Collections.emptyList();
+
+	private Widget switcherIcon;
+	private Widget switcherParent;
+	/**
+	 * Every switcher widget created on the current parent. There is no API to delete a single
+	 * child, so a superseded one is hidden and kept here - which is also what guarantees only
+	 * one is ever visible if the client hands back a stale child array.
+	 */
+	private final List<Widget> switcherHistory = new ArrayList<>();
+
 	@Inject
 	BankCategoryRenderer(Client client, ClientThread clientThread, ItemManager itemManager,
-		BankSearch bankSearch, TabInterface tabInterface, BetterBankConfig config)
+		BankSearch bankSearch, TabInterface tabInterface, BetterBankConfig config,
+		ConfigManager configManager, OverrideStore store, ChatboxPanelManager chatboxPanelManager)
 	{
 		this.client = client;
 		this.clientThread = clientThread;
@@ -93,11 +136,44 @@ public class BankCategoryRenderer
 		this.bankSearch = bankSearch;
 		this.tabInterface = tabInterface;
 		this.config = config;
+		this.configManager = configManager;
+		this.store = store;
+		this.chatboxPanelManager = chatboxPanelManager;
+	}
+
+	/**
+	 * On-screen bounds of the scheme switcher, or null when it is not showing. Lets the
+	 * tooltip overlay name the current scheme on hover, which is what replaces the text label
+	 * the icon used to carry.
+	 */
+	public java.awt.Rectangle switcherBounds()
+	{
+		final Widget icon = switcherIcon;
+		return icon == null || icon.isHidden() ? null : icon.getBounds();
+	}
+
+	/** The items the last layout placed. Empty when the plugin is standing down. */
+	public List<BankItem> placedItems()
+	{
+		return placedItems;
 	}
 
 	public void setClassifier(Classifier classifier)
 	{
 		this.classifier = classifier;
+	}
+
+	/**
+	 * Drops cached attributes. Equipment stats load asynchronously after startup, so anything
+	 * resolved before they arrived is stale; the bank opening is a cheap, natural point to
+	 * re-resolve.
+	 */
+	private void invalidateAttributeCache()
+	{
+		if (classifier != null)
+		{
+			classifier.resolver().invalidate();
+		}
 	}
 
 	// ---- lifecycle -----------------------------------------------------------------
@@ -113,6 +189,7 @@ public class BankCategoryRenderer
 		clientThread.invokeLater(() ->
 		{
 			hideAllHeaders();
+			hideSwitcher();
 			if (client.getWidget(InterfaceID.Bankmain.ITEMS) != null)
 			{
 				bankSearch.layoutBank();
@@ -163,6 +240,10 @@ public class BankCategoryRenderer
 		{
 			headers.clear();
 			headerParent = null;
+			switcherIcon = null;
+			switcherParent = null;
+			switcherHistory.clear();
+			invalidateAttributeCache();
 		}
 	}
 
@@ -192,6 +273,16 @@ public class BankCategoryRenderer
 		}
 	}
 
+	/**
+	 * The active scheme with the user's stored edits applied. The shipped scheme is never
+	 * mutated, which is what makes reset a matter of deleting stored edits.
+	 */
+	private Scheme activeScheme()
+	{
+		final Scheme base = config.scheme().scheme();
+		return SchemeCustomizer.apply(base, store.customization(base.id()));
+	}
+
 	/** One layout pass. Only ever called through {@link #layout()}, which guards re-entry. */
 	private void layoutPass(Widget container)
 	{
@@ -200,20 +291,26 @@ public class BankCategoryRenderer
 			// Stand down. No restore is needed: this runs at the end of the bank's own rebuild,
 			// so the items are already sitting at their vanilla positions.
 			hideAllHeaders();
+			hideSwitcher();
+			placedItems = Collections.emptyList();
 			return;
 		}
 
-		final Scheme scheme = config.scheme().scheme();
+		updateSchemeSwitcher();
+
+		final Scheme scheme = activeScheme();
 		final List<BankItem> items = collectItems(container);
 		if (items.isEmpty())
 		{
-			// An empty bank still needs our headers gone.
+			// An empty bank still needs our headers gone. The switcher stays: an empty bank is
+			// still ours, and the user may want to switch away from a scheme showing nothing.
 			hideAllHeaders();
 			return;
 		}
 
 		final Map<String, List<BankItem>> grouped = group(scheme, items);
 		final int contentHeight = place(container, scheme, grouped);
+		placedItems = items;
 
 		resizeBankScrollRegion(container, contentHeight);
 	}
@@ -315,7 +412,8 @@ public class BankCategoryRenderer
 				log.debug("no composition for item {}", canonical, ex);
 			}
 
-			items.add(new BankItem(child, canonical, name == null ? "" : name, stackValue, priced));
+			items.add(new BankItem(child, canonical, name == null ? "" : name, stackValue,
+				priced ? unitPrice : 0, Math.max(quantity, 0), priced));
 		}
 		return items;
 	}
@@ -358,7 +456,12 @@ public class BankCategoryRenderer
 
 			items.sort(config.sortMode().comparator());
 
-			placeHeader(container, headerIndex++, category, items.size(), y, headerWidth);
+			long categoryValue = 0;
+			for (BankItem item : items)
+			{
+				categoryValue += item.stackValue();
+			}
+			placeHeader(container, headerIndex++, category, items.size(), categoryValue, y, headerWidth);
 			y += HEADER_HEIGHT;
 
 			for (int i = 0; i < items.size(); i++)
@@ -382,7 +485,8 @@ public class BankCategoryRenderer
 		return y;
 	}
 
-	private void placeHeader(Widget container, int index, Category category, int count, int y, int width)
+	private void placeHeader(Widget container, int index, Category category, int count,
+		long totalValue, int y, int width)
 	{
 		if (container != headerParent)
 		{
@@ -402,7 +506,10 @@ public class BankCategoryRenderer
 			headers.add(header);
 		}
 
-		header.setText(category.name() + "  (" + count + ")");
+		// Name, how many, and what the bucket is worth - abbreviated so a header holding a few
+		// hundred million still fits on one line.
+		header.setText(category.name() + "  <col=b0b0b0>(" + count + ")</col>"
+			+ "  <col=ffd700>" + ValueFormat.abbreviate(totalValue) + "</col>");
 		header.setFontId(FontID.BOLD_12);
 		header.setTextColor(HEADER_COLOUR);
 		header.setTextShadowed(true);
@@ -412,6 +519,327 @@ public class BankCategoryRenderer
 		header.setOriginalHeight(HEADER_HEIGHT);
 		header.setHidden(false);
 		header.revalidate();
+	}
+
+	/**
+	 * Builds (or refreshes) the scheme switcher.
+	 *
+	 * <p><b>Why this is legitimate.</b> SPEC §2 and Jagex's third-party guidelines prohibit
+	 * adding menu entries that cause an action to be sent to the server. This widget is
+	 * created by the plugin, is not part of the game interface, and its click handler does
+	 * exactly one thing: write a config value. No script runs, no packet is sent, and no menu
+	 * entry is added to any game widget. Core Bank Tags builds its tab UI the same way, on
+	 * this same parent container.
+	 *
+	 * <p>It is parented to {@code ITEMS_CONTAINER} rather than {@code ITEMS} so it does not
+	 * scroll away with the item grid, and it is positioned in the chrome above the grid rather
+	 * than over the bank's own buttons, so it cannot be mistaken for a game control.
+	 */
+	private void updateSchemeSwitcher()
+	{
+		final Widget parent = client.getWidget(InterfaceID.Bankmain.ITEMS_CONTAINER);
+		if (parent == null)
+		{
+			return;
+		}
+
+		final boolean needsNewWidget = switcherIcon == null || parent != switcherParent
+			|| !stillAChildOf(parent, switcherIcon);
+		if (needsNewWidget)
+		{
+			if (parent != switcherParent)
+			{
+				// Different container instance - the old children belong to the old one.
+				switcherHistory.clear();
+			}
+			// Hide anything we made before, so a leaked widget can never draw behind the new
+			// one. This is the "previous icon still showing" failure.
+			for (Widget stale : switcherHistory)
+			{
+				if (stale != null)
+				{
+					stale.setHidden(true);
+				}
+			}
+
+			switcherParent = parent;
+			switcherIcon = parent.createChild(-1, WidgetType.GRAPHIC);
+			switcherHistory.add(switcherIcon);
+			log.debug("Better Bank switcher: created widget #{} on parent {}",
+				switcherHistory.size(), parent.getId());
+			switcherIcon.setOriginalWidth(SWITCHER_ICON_SIZE);
+			switcherIcon.setOriginalHeight(SWITCHER_ICON_SIZE);
+			switcherIcon.setHasListener(true);
+			switcherIcon.setNoClickThrough(true);
+			// Client-side only: the handler writes one config value. See the note below.
+			// Two client-side ops on our own widget. Op index is 1-based in the event.
+			switcherIcon.setOnOpListener((JavaScriptCallback) e ->
+			{
+				if (e.getOp() == 2)
+				{
+					confirmResetScheme();
+				}
+				else
+				{
+					cycleScheme();
+				}
+			});
+			switcherIcon.setAction(0, "Switch scheme");
+			switcherIcon.setAction(1, "Reset scheme");
+		}
+
+		if (!positionSwitcher(parent))
+		{
+			// Never draw at an unknown position - it would land on the items.
+			switcherIcon.setHidden(true);
+			return;
+		}
+
+		// A game sprite, referenced by id. Anything that overrides that id - a resource pack -
+		// is picked up automatically, because the client resolves widget sprites through an
+		// id-keyed override map at draw time. The icon is the whole control: the scheme name
+		// is shown on hover instead of taking a text label's worth of the strip.
+		// A scheme change only changes this: the same widget keeps its position and handlers.
+		switcherIcon.setSpriteId(config.scheme().spriteId());
+		switcherIcon.setHidden(false);
+		switcherIcon.revalidate();
+
+		if (needsNewWidget && switcherHistory.size() > 1)
+		{
+			log.debug("Better Bank switcher: {} widgets created this session on this parent;"
+				+ " {} hidden", switcherHistory.size(), switcherHistory.size() - 1);
+		}
+	}
+
+	/** Visible switcher widgets. Must always be 1 while the switcher is showing. */
+	int visibleSwitcherCount()
+	{
+		int visible = 0;
+		for (Widget w : switcherHistory)
+		{
+			if (w != null && !w.isHidden())
+			{
+				visible++;
+			}
+		}
+		return visible;
+	}
+
+	/**
+	 * Puts the switcher in the empty strip left of the item grid.
+	 *
+	 * <p><b>Everything is derived from the grid's real bounds.</b> Confirmed from a live
+	 * session: {@code ITEMS} is a <i>child</i> of {@code ITEMS_CONTAINER}
+	 * (786444 inside 786441, itself inside 786433), not a sibling, and our widget is appended
+	 * after it - so the icon draws <i>over</i> the grid. Layering cannot be relied on to hide
+	 * a bad position; the position has to be right, in canvas space, against measured bounds.
+	 *
+	 * <p>The potion-storage cauldron is not used. {@code POTIONSTORE_BUTTON} reported
+	 * {@code absent} on every pass of a real session, so that path never ran and every
+	 * position came from a fallback that had no relationship to the grid at all.
+	 *
+	 * @return false when the bank is not laid out yet and placement must be deferred
+	 */
+	private boolean positionSwitcher(Widget parent)
+	{
+		final net.runelite.api.Point parentAt = parent.getCanvasLocation();
+		if (!isPositioned(parentAt))
+		{
+			// First pass before the interface is laid out: the parent reports (-1,-1). Computing
+			// from that puts the icon somewhere arbitrary, so defer to the next rebuild.
+			log.debug("Better Bank switcher: parent not positioned yet ({}); deferring placement",
+				parentAt == null ? "null" : parentAt.getX() + "," + parentAt.getY());
+			return false;
+		}
+
+		final java.awt.Rectangle grid = gridBoundsCanvas();
+		if (grid == null)
+		{
+			log.debug("Better Bank switcher: grid bounds unknown; deferring placement");
+			return false;
+		}
+
+		final int[] local = leftStripPlacement(parentAt.getX(), parentAt.getY(), grid.x, grid.y);
+		switcherIcon.setXPositionMode(WidgetPositionMode.ABSOLUTE_LEFT);
+		switcherIcon.setYPositionMode(WidgetPositionMode.ABSOLUTE_TOP);
+		switcherIcon.setOriginalX(local[0]);
+		switcherIcon.setOriginalY(local[1]);
+
+		log.debug("Better Bank switcher position: parentCanvas=({},{}) gridCanvas=({},{},{}x{})"
+				+ " -> local=({},{}) mode=ABSOLUTE_TOP/LEFT visibleWidgets={}",
+			parentAt.getX(), parentAt.getY(), grid.x, grid.y, grid.width, grid.height,
+			local[0], local[1], visibleSwitcherCount());
+		return true;
+	}
+
+	/** A widget the interface has not laid out yet reports (-1,-1). */
+	private static boolean isPositioned(net.runelite.api.Point at)
+	{
+		return at != null && (at.getX() >= 0 || at.getY() >= 0);
+	}
+
+	/**
+	 * Where the icon goes, in coordinates local to its parent.
+	 *
+	 * <p>Horizontally: in the strip, right edge kept clear of the grid. Vertically: level with
+	 * the top of the grid, so it sits beside the first row rather than floating halfway down
+	 * the column next to the items.
+	 *
+	 * <p>Pure, so the placement rule is testable without a client.
+	 *
+	 * @return {@code {localX, localY}}
+	 */
+	static int[] leftStripPlacement(int parentCanvasX, int parentCanvasY,
+		int gridLeftCanvasX, int gridTopCanvasY)
+	{
+		final int canvasX = clampLeftOfGrid(parentCanvasX + SWITCHER_X, parentCanvasX, gridLeftCanvasX);
+		// Level with the top of the grid, never above the parent's own top edge.
+		final int canvasY = Math.max(gridTopCanvasY, parentCanvasY);
+		return new int[]{canvasX - parentCanvasX, canvasY - parentCanvasY};
+	}
+
+	/**
+	 * The item grid in canvas space. Measured from the items actually drawn where possible,
+	 * falling back to the grid widget's own bounds offset by {@link #START_X}.
+	 */
+	private java.awt.Rectangle gridBoundsCanvas()
+	{
+		int left = Integer.MAX_VALUE;
+		int top = Integer.MAX_VALUE;
+		int right = Integer.MIN_VALUE;
+		int bottom = Integer.MIN_VALUE;
+		for (BankItem item : placedItems)
+		{
+			final Widget widget = item.widget();
+			if (widget == null || widget.isHidden())
+			{
+				continue;
+			}
+			final java.awt.Rectangle b = widget.getBounds();
+			if (b != null && b.width > 0 && b.height > 0)
+			{
+				left = Math.min(left, b.x);
+				top = Math.min(top, b.y);
+				right = Math.max(right, b.x + b.width);
+				bottom = Math.max(bottom, b.y + b.height);
+			}
+		}
+		if (left != Integer.MAX_VALUE)
+		{
+			return new java.awt.Rectangle(left, top, right - left, bottom - top);
+		}
+
+		// No items on screen (empty bank, or scrolled past them): fall back to the grid widget.
+		final Widget items = client.getWidget(InterfaceID.Bankmain.ITEMS);
+		if (items == null || !isPositioned(items.getCanvasLocation()))
+		{
+			return null;
+		}
+		final java.awt.Rectangle b = items.getBounds();
+		if (b == null || b.width <= 0)
+		{
+			return null;
+		}
+		return new java.awt.Rectangle(b.x + START_X, b.y, Math.max(b.width - START_X, 1), b.height);
+	}
+
+	/**
+	 * Keeps the icon's right edge left of the item grid, and its left edge inside its parent.
+	 *
+	 * <p>Pure and in one space (canvas), so the rule that was wrong before can be tested. Pass
+	 * {@link Integer#MIN_VALUE} for {@code gridLeftCanvasX} when the grid position is unknown.
+	 */
+	static int clampLeftOfGrid(int desiredCanvasX, int parentCanvasX, int gridLeftCanvasX)
+	{
+		int x = desiredCanvasX;
+		if (gridLeftCanvasX != Integer.MIN_VALUE)
+		{
+			final int maxX = gridLeftCanvasX - SWITCHER_ICON_SIZE - SWITCHER_GRID_MARGIN;
+			if (x > maxX)
+			{
+				x = maxX;
+			}
+		}
+		return Math.max(x, parentCanvasX);
+	}
+
+	private static boolean stillAChildOf(Widget parent, Widget child)
+	{
+		final Widget[] children = parent.getDynamicChildren();
+		if (children == null)
+		{
+			return false;
+		}
+		for (Widget c : children)
+		{
+			if (c == child)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Advances to the next scheme and persists it.
+	 *
+	 * <p>Writing config is the entire effect. {@code ConfigManager} makes it survive a
+	 * restart, and the resulting {@code ConfigChanged} drives the redraw, so there is no
+	 * separate refresh path to keep in sync.
+	 */
+	private void cycleScheme()
+	{
+		final SchemeChoice[] all = SchemeChoice.values();
+		final SchemeChoice next = all[(config.scheme().ordinal() + 1) % all.length];
+		configManager.setConfiguration(BetterBankConfig.GROUP, "scheme", next);
+	}
+
+	/**
+	 * Asks before destroying anything. Reset throws away edits the user may have spent months
+	 * accumulating, so it never happens on a single click.
+	 */
+	private void confirmResetScheme()
+	{
+		final SchemeChoice choice = config.scheme();
+		final String schemeId = choice.scheme().id();
+		if (!store.isCustomized(schemeId))
+		{
+			chatMessage("Better Bank: " + choice + " has no customization to reset.");
+			return;
+		}
+
+		chatboxPanelManager.openTextMenuInput("Reset " + choice + " to its shipped state?")
+			.option("Yes, discard my changes", () -> clientThread.invoke(() ->
+			{
+				store.reset(schemeId);
+				chatMessage("Better Bank: " + choice + " reset to its shipped state.");
+				requestRebuild();
+			}))
+			.option("No, keep them", () ->
+			{
+			})
+			.build();
+	}
+
+	private void chatMessage(String message)
+	{
+		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", message, null);
+	}
+
+	private void hideSwitcher()
+	{
+		// Hide every one we made, not just the current reference.
+		for (Widget w : switcherHistory)
+		{
+			if (w != null)
+			{
+				w.setHidden(true);
+			}
+		}
+		if (switcherIcon != null)
+		{
+			switcherIcon.setHidden(true);
+		}
 	}
 
 	private void hideAllHeaders()

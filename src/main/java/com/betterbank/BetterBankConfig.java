@@ -45,4 +45,15 @@ public interface BetterBankConfig extends Config
 	{
 		return SortMode.VALUE;
 	}
+
+	@ConfigItem(
+		keyName = "showValueTooltip",
+		name = "Value tooltip on hover",
+		description = "Show an item's single and full-stack value when you hover it in the bank",
+		position = 4
+	)
+	default boolean showValueTooltip()
+	{
+		return true;
+	}
 }

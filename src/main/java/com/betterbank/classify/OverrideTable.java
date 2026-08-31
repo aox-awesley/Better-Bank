@@ -15,62 +15,63 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * The bundled item&rarr;attributes table (SPEC §7 module 1).
+ * The bundled override table: hand-maintained attributes for the items the client and the
+ * name rules get wrong or cannot know.
  *
- * <p>Loaded from a JSON resource inside the jar. Deployed plugins run from inside a jar and
- * are not unpacked, so this always reads through {@code getResourceAsStream} - never
- * {@code getResource}.
+ * <p>This used to be an attempt at an item&rarr;attributes table for the whole game, which
+ * does not scale - OSRS has tens of thousands of items and this file was carrying a few
+ * hundred. Attributes now come from {@link RuntimeDerivation} and {@link NamePatterns}; what
+ * is left here is only the genuine exceptions, and it wins over both.
+ *
+ * <p>Loaded through {@code getResourceAsStream}, never {@code getResource} - a deployed
+ * plugin runs from inside a jar and is not unpacked.
  */
-public final class AttributeTable
+public final class OverrideTable
 {
 	public static final String RESOURCE_PATH = "/com/betterbank/item-attributes.json";
 
-	/**
-	 * The only format version this build understands. Bump deliberately, and only alongside
-	 * a migration - the table ships inside the jar, but user data keyed off it does not.
-	 */
+	/** The only format version this build understands. Bump alongside a migration. */
 	public static final int SUPPORTED_FORMAT_VERSION = 1;
 
-	private final Map<Integer, ItemAttributes> byItemId;
+	private final Map<Integer, ItemDto> byItemId;
 
-	private AttributeTable(Map<Integer, ItemAttributes> byItemId)
+	private OverrideTable(Map<Integer, ItemDto> byItemId)
 	{
 		this.byItemId = Collections.unmodifiableMap(byItemId);
 	}
 
-	/** Loads the table bundled with the plugin. */
-	public static AttributeTable bundled(Gson gson) throws IOException
+	public static OverrideTable bundled(Gson gson) throws IOException
 	{
-		try (InputStream in = AttributeTable.class.getResourceAsStream(RESOURCE_PATH))
+		try (InputStream in = OverrideTable.class.getResourceAsStream(RESOURCE_PATH))
 		{
 			if (in == null)
 			{
-				throw new IOException("Bundled attribute table missing: " + RESOURCE_PATH);
+				throw new IOException("Bundled override table missing: " + RESOURCE_PATH);
 			}
 			return fromJson(gson, in);
 		}
 	}
 
-	public static AttributeTable fromJson(Gson gson, InputStream in) throws IOException
+	public static OverrideTable fromJson(Gson gson, InputStream in) throws IOException
 	{
 		try (Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8))
 		{
 			final FileDto dto = gson.fromJson(reader, FileDto.class);
 			if (dto == null)
 			{
-				throw new IOException("Attribute table is empty");
+				throw new IOException("Override table is empty");
 			}
 			if (dto.formatVersion != SUPPORTED_FORMAT_VERSION)
 			{
-				throw new IOException("Unsupported attribute table formatVersion "
+				throw new IOException("Unsupported override table formatVersion "
 					+ dto.formatVersion + " (expected " + SUPPORTED_FORMAT_VERSION + ")");
 			}
 			if (dto.items == null)
 			{
-				throw new IOException("Attribute table has no \"items\"");
+				throw new IOException("Override table has no \"items\"");
 			}
 
-			final Map<Integer, ItemAttributes> parsed = new LinkedHashMap<>(dto.items.size());
+			final Map<Integer, ItemDto> parsed = new LinkedHashMap<>(dto.items.size());
 			for (Map.Entry<String, ItemDto> e : dto.items.entrySet())
 			{
 				final int itemId;
@@ -80,28 +81,24 @@ public final class AttributeTable
 				}
 				catch (NumberFormatException nfe)
 				{
-					throw new IOException("Attribute table key is not an item id: " + e.getKey());
+					throw new IOException("Override table key is not an item id: " + e.getKey());
 				}
-				parsed.put(itemId, e.getValue().toAttributes(itemId));
+				// Validate eagerly so a typo fails the load rather than one silent bad item.
+				e.getValue().validate(itemId);
+				parsed.put(itemId, e.getValue());
 			}
-			return new AttributeTable(parsed);
+			return new OverrideTable(parsed);
 		}
 		catch (JsonParseException ex)
 		{
-			throw new IOException("Malformed attribute table", ex);
+			throw new IOException("Malformed override table", ex);
 		}
 	}
 
-	/** Builds a table directly, for tests and for future runtime-derived overlays. */
-	public static AttributeTable of(Map<Integer, ItemAttributes> items)
+	/** An empty table, for tests that want derivation only. */
+	public static OverrideTable empty()
 	{
-		return new AttributeTable(new LinkedHashMap<>(items));
-	}
-
-	/** @return the item's attributes, or null if the table does not cover this item. */
-	public ItemAttributes get(int itemId)
-	{
-		return byItemId.get(itemId);
+		return new OverrideTable(Collections.emptyMap());
 	}
 
 	public boolean contains(int itemId)
@@ -119,6 +116,26 @@ public final class AttributeTable
 		return byItemId.keySet();
 	}
 
+	/** The override's name for this item, or null. Used only when the client has none. */
+	public String nameFor(int itemId)
+	{
+		final ItemDto dto = byItemId.get(itemId);
+		return dto == null ? null : dto.name;
+	}
+
+	/**
+	 * Applies this item's overrides onto {@code out}. Only fields the JSON actually specifies
+	 * are written, so an override can correct one attribute without restating the rest.
+	 */
+	public void applyOnto(int itemId, ItemAttributes.Builder out)
+	{
+		final ItemDto dto = byItemId.get(itemId);
+		if (dto != null)
+		{
+			dto.applyOnto(out, itemId);
+		}
+	}
+
 	// ---- JSON shape ----------------------------------------------------------------
 
 	private static final class FileDto
@@ -128,9 +145,8 @@ public final class AttributeTable
 	}
 
 	/**
-	 * Mirrors one entry in the JSON. Every field is a boxed/nullable type so an absent field
-	 * is distinguishable from a present-but-default one, and defaults live in exactly one
-	 * place ({@link ItemAttributes.Builder}).
+	 * Mirrors one entry. Every field is boxed so an absent field is distinguishable from a
+	 * present-but-default one - that is what lets an override be partial.
 	 */
 	private static final class ItemDto
 	{
@@ -151,10 +167,15 @@ public final class AttributeTable
 		Boolean rune;
 		Boolean currency;
 		Boolean teleport;
+		Boolean pet;
 
-		ItemAttributes toAttributes(int itemId)
+		void validate(int itemId)
 		{
-			final ItemAttributes.Builder b = ItemAttributes.builder(name == null ? "" : name);
+			applyOnto(ItemAttributes.builder(""), itemId);
+		}
+
+		void applyOnto(ItemAttributes.Builder b, int itemId)
+		{
 			if (slot != null)
 			{
 				b.slot(parse(EquipmentSlot.class, slot, itemId, "slot"));
@@ -229,13 +250,15 @@ public final class AttributeTable
 			{
 				b.teleport(teleport);
 			}
-			return b.build();
+			if (pet != null)
+			{
+				b.pet(pet);
+			}
 		}
 
 		/**
-		 * Fails loudly on an unrecognised value. Gson would silently yield null for an
-		 * unknown enum constant, which would turn a typo in the data into an item that is
-		 * quietly wrong rather than a build that fails.
+		 * Fails loudly on an unrecognised value. Gson yields null for an unknown enum
+		 * constant, which would turn a typo in the data into a quietly wrong item.
 		 */
 		private static <E extends Enum<E>> E parse(Class<E> type, String value, int itemId, String field)
 		{
