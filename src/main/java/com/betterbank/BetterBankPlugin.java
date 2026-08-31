@@ -5,6 +5,7 @@ import com.betterbank.classify.Classifier;
 import com.betterbank.classify.ItemMetadata;
 import com.betterbank.classify.OverrideTable;
 import com.betterbank.game.ClientItemMetadata;
+import com.betterbank.panel.BetterBankPanel;
 import com.betterbank.store.ConfigManagerStore;
 import com.betterbank.store.ConfigStore;
 import com.betterbank.store.OverrideStore;
@@ -25,7 +26,11 @@ import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDependency;
 import net.runelite.client.plugins.PluginDescriptor;
+import java.awt.image.BufferedImage;
+import net.runelite.client.ui.ClientToolbar;
+import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.ui.overlay.OverlayManager;
+import net.runelite.client.util.ImageUtil;
 import net.runelite.client.plugins.banktags.BankTagsPlugin;
 
 /**
@@ -60,6 +65,14 @@ public class BetterBankPlugin extends Plugin
 	private OverlayManager overlayManager;
 
 	@Inject
+	private ClientToolbar clientToolbar;
+
+	@Inject
+	private BetterBankPanel panel;
+
+	private NavigationButton navButton;
+
+	@Inject
 	private Gson gson;
 
 	@Inject
@@ -90,6 +103,19 @@ public class BetterBankPlugin extends Plugin
 		final AttributeResolver resolver = new AttributeResolver(overrides, itemMetadata);
 		renderer.setClassifier(new Classifier(resolver, overrideStore));
 		overlayManager.add(tooltipOverlay);
+
+		// Bundled resource, read from inside the jar - deployed plugins are not unpacked.
+		final BufferedImage icon =
+			ImageUtil.loadImageResource(BetterBankPlugin.class, "/com/betterbank/panel-icon.png");
+		navButton = NavigationButton.builder()
+			.tooltip("Better Bank")
+			.icon(icon)
+			.priority(7)
+			.panel(panel)
+			.build();
+		clientToolbar.addNavigation(navButton);
+		panel.refresh();
+
 		renderer.requestRebuild();
 	}
 
@@ -97,6 +123,11 @@ public class BetterBankPlugin extends Plugin
 	protected void shutDown()
 	{
 		// Leaves the bank exactly vanilla. Never blocks.
+		if (navButton != null)
+		{
+			clientToolbar.removeNavigation(navButton);
+			navButton = null;
+		}
 		overlayManager.remove(tooltipOverlay);
 		renderer.setClassifier(null);
 		renderer.restoreVanilla();
@@ -134,6 +165,7 @@ public class BetterBankPlugin extends Plugin
 		if (BetterBankConfig.GROUP.equals(event.getGroup()))
 		{
 			renderer.requestRebuild();
+			panel.refresh();
 		}
 	}
 

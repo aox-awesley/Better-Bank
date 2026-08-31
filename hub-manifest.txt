@@ -1,0 +1,24 @@
+# Better Bank — RuneLite Plugin Hub manifest
+#
+# NOT SUBMITTED. To publish: fork runelite/plugin-hub, add the two lines at the
+# bottom of this file as plugins/better-bank (no extension), open the PR yourself.
+#
+#   repository= must be a public HTTPS URL ending in .git. The origin remote here is
+#               SSH (git@github.com:aox-awesley/Better-Bank.git), which the Hub cannot clone; the HTTPS form is below.
+#   commit=     must be the full 40-char sha of the commit to build. It must exist on a
+#               branch of that repository and must never be moved or force-pushed after
+#               the PR is opened.
+#
+# !! The sha below is HEAD as of writing, which does NOT contain this work — everything
+# !! from M1 onwards is still uncommitted. Commit and push first, then replace it with:
+# !!     git rev-parse HEAD
+#
+# Before opening the PR, confirm:
+#   - the repository is public
+#   - LICENSE (BSD-2-Clause) is present at the repo root
+#   - icon.png (48x72) is present at the repo root
+#   - README screenshots are filled in
+#   - ./gradlew build passes from a clean clone
+
+repository=https://github.com/aox-awesley/Better-Bank.git
+commit=9768147f84094a9b8d2e35ba9486dd201a94a078

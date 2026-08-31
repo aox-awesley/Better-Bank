@@ -127,7 +127,7 @@ public class BankTooltipOverlay extends Overlay
 	 * Single and full-stack value. Untradeables have no price, and saying so is more useful
 	 * than showing a confident zero.
 	 */
-	private static String describe(BankItem item)
+	static String describe(BankItem item)
 	{
 		final StringBuilder out = new StringBuilder();
 		out.append("<col=ff9040>").append(item.name()).append("</col>");
