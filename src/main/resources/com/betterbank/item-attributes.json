@@ -1,0 +1,2925 @@
+{
+ "formatVersion": 1,
+ "items": {
+  "2": {
+   "name": "Cannonball",
+   "slot": "AMMUNITION",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true,
+   "stackable": true
+  },
+  "199": {
+   "name": "Grimy guam leaf",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "201": {
+   "name": "Grimy marrentill",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "203": {
+   "name": "Grimy tarromin",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "205": {
+   "name": "Grimy harralander",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "207": {
+   "name": "Grimy ranarr weed",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "209": {
+   "name": "Grimy irit leaf",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "211": {
+   "name": "Grimy avantoe",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "213": {
+   "name": "Grimy kwuarm",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "215": {
+   "name": "Grimy cadantine",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "217": {
+   "name": "Grimy dwarf weed",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "219": {
+   "name": "Grimy torstol",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "221": {
+   "name": "Eye of newt",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": false
+  },
+  "223": {
+   "name": "Red spiders' eggs",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "225": {
+   "name": "Limpwurt root",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "227": {
+   "name": "Vial of water",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "229": {
+   "name": "Vial",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "231": {
+   "name": "Snape grass",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "233": {
+   "name": "Pestle and mortar",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "235": {
+   "name": "Unicorn horn dust",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "239": {
+   "name": "White berries",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "241": {
+   "name": "Dragon scale dust",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "243": {
+   "name": "Blue dragon scale",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "245": {
+   "name": "Wine of Zamorak",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "249": {
+   "name": "Guam leaf",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "251": {
+   "name": "Marrentill",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "253": {
+   "name": "Tarromin",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "255": {
+   "name": "Harralander",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "257": {
+   "name": "Ranarr weed",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "259": {
+   "name": "Irit leaf",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "261": {
+   "name": "Avantoe",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "263": {
+   "name": "Kwuarm",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "265": {
+   "name": "Cadantine",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "267": {
+   "name": "Dwarf weed",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "269": {
+   "name": "Torstol",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "301": {
+   "name": "Lobster pot",
+   "skills": [
+    "FISHING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "303": {
+   "name": "Small fishing net",
+   "skills": [
+    "FISHING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "307": {
+   "name": "Fishing rod",
+   "skills": [
+    "FISHING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "309": {
+   "name": "Fly fishing rod",
+   "skills": [
+    "FISHING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "311": {
+   "name": "Harpoon",
+   "skills": [
+    "FISHING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "315": {
+   "name": "Shrimps",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": false
+  },
+  "317": {
+   "name": "Raw shrimps",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": false
+  },
+  "319": {
+   "name": "Anchovies",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": false
+  },
+  "321": {
+   "name": "Raw anchovies",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": false
+  },
+  "325": {
+   "name": "Sardine",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": false
+  },
+  "327": {
+   "name": "Raw sardine",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": false
+  },
+  "329": {
+   "name": "Salmon",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": false
+  },
+  "331": {
+   "name": "Raw salmon",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": false
+  },
+  "333": {
+   "name": "Trout",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": false
+  },
+  "335": {
+   "name": "Raw trout",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": false
+  },
+  "339": {
+   "name": "Cod",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": false
+  },
+  "341": {
+   "name": "Raw cod",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": false
+  },
+  "345": {
+   "name": "Raw herring",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": false
+  },
+  "347": {
+   "name": "Herring",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": false
+  },
+  "349": {
+   "name": "Raw pike",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": false
+  },
+  "351": {
+   "name": "Pike",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": false
+  },
+  "353": {
+   "name": "Raw mackerel",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": true
+  },
+  "355": {
+   "name": "Mackerel",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": true
+  },
+  "359": {
+   "name": "Raw tuna",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": false
+  },
+  "361": {
+   "name": "Tuna",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": false
+  },
+  "363": {
+   "name": "Raw bass",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": true
+  },
+  "365": {
+   "name": "Bass",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": true
+  },
+  "371": {
+   "name": "Raw swordfish",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": false
+  },
+  "373": {
+   "name": "Swordfish",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": false
+  },
+  "377": {
+   "name": "Raw lobster",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": false
+  },
+  "379": {
+   "name": "Lobster",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": false
+  },
+  "383": {
+   "name": "Raw shark",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": true
+  },
+  "385": {
+   "name": "Shark",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": true
+  },
+  "389": {
+   "name": "Raw manta ray",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": true
+  },
+  "391": {
+   "name": "Manta ray",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": true
+  },
+  "395": {
+   "name": "Raw sea turtle",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": true
+  },
+  "397": {
+   "name": "Sea turtle",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": true
+  },
+  "436": {
+   "name": "Copper ore",
+   "material": "RAW",
+   "skills": [
+    "MINING",
+    "SMITHING"
+   ],
+   "members": false
+  },
+  "438": {
+   "name": "Tin ore",
+   "material": "RAW",
+   "skills": [
+    "MINING",
+    "SMITHING"
+   ],
+   "members": false
+  },
+  "440": {
+   "name": "Iron ore",
+   "material": "RAW",
+   "skills": [
+    "MINING",
+    "SMITHING"
+   ],
+   "members": false
+  },
+  "442": {
+   "name": "Silver ore",
+   "material": "RAW",
+   "skills": [
+    "MINING",
+    "SMITHING"
+   ],
+   "members": false
+  },
+  "444": {
+   "name": "Gold ore",
+   "material": "RAW",
+   "skills": [
+    "MINING",
+    "SMITHING"
+   ],
+   "members": false
+  },
+  "447": {
+   "name": "Mithril ore",
+   "material": "RAW",
+   "skills": [
+    "MINING",
+    "SMITHING"
+   ],
+   "members": false
+  },
+  "449": {
+   "name": "Adamantite ore",
+   "material": "RAW",
+   "skills": [
+    "MINING",
+    "SMITHING"
+   ],
+   "members": false
+  },
+  "451": {
+   "name": "Runite ore",
+   "material": "RAW",
+   "skills": [
+    "MINING",
+    "SMITHING"
+   ],
+   "members": false
+  },
+  "453": {
+   "name": "Coal",
+   "material": "RAW",
+   "skills": [
+    "MINING",
+    "SMITHING"
+   ],
+   "members": false
+  },
+  "526": {
+   "name": "Bones",
+   "material": "RAW",
+   "skills": [
+    "PRAYER"
+   ],
+   "members": false
+  },
+  "530": {
+   "name": "Bat bones",
+   "material": "RAW",
+   "skills": [
+    "PRAYER"
+   ],
+   "members": false
+  },
+  "532": {
+   "name": "Big bones",
+   "material": "RAW",
+   "skills": [
+    "PRAYER"
+   ],
+   "members": false
+  },
+  "534": {
+   "name": "Babydragon bones",
+   "material": "RAW",
+   "skills": [
+    "PRAYER"
+   ],
+   "members": true
+  },
+  "536": {
+   "name": "Dragon bones",
+   "material": "RAW",
+   "skills": [
+    "PRAYER"
+   ],
+   "members": true
+  },
+  "552": {
+   "name": "Ghostspeak amulet",
+   "slot": "NECK",
+   "tradeable": false,
+   "questItem": true
+  },
+  "554": {
+   "name": "Fire rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": false,
+   "stackable": true,
+   "rune": true
+  },
+  "555": {
+   "name": "Water rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": false,
+   "stackable": true,
+   "rune": true
+  },
+  "556": {
+   "name": "Air rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": false,
+   "stackable": true,
+   "rune": true
+  },
+  "557": {
+   "name": "Earth rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": false,
+   "stackable": true,
+   "rune": true
+  },
+  "558": {
+   "name": "Mind rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": false,
+   "stackable": true,
+   "rune": true
+  },
+  "559": {
+   "name": "Body rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": false,
+   "stackable": true,
+   "rune": true
+  },
+  "560": {
+   "name": "Death rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": true,
+   "stackable": true,
+   "rune": true
+  },
+  "561": {
+   "name": "Nature rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": false,
+   "stackable": true,
+   "rune": true
+  },
+  "562": {
+   "name": "Chaos rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": false,
+   "stackable": true,
+   "rune": true
+  },
+  "563": {
+   "name": "Law rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": false,
+   "stackable": true,
+   "rune": true
+  },
+  "564": {
+   "name": "Cosmic rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": true,
+   "stackable": true,
+   "rune": true
+  },
+  "565": {
+   "name": "Blood rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": true,
+   "stackable": true,
+   "rune": true
+  },
+  "566": {
+   "name": "Soul rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": true,
+   "stackable": true,
+   "rune": true
+  },
+  "590": {
+   "name": "Tinderbox",
+   "skills": [
+    "FIREMAKING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "806": {
+   "name": "Bronze dart",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false,
+   "stackable": true
+  },
+  "807": {
+   "name": "Iron dart",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false,
+   "stackable": true
+  },
+  "808": {
+   "name": "Steel dart",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false,
+   "stackable": true
+  },
+  "809": {
+   "name": "Mithril dart",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true,
+   "stackable": true
+  },
+  "810": {
+   "name": "Adamant dart",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true,
+   "stackable": true
+  },
+  "811": {
+   "name": "Rune dart",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true,
+   "stackable": true
+  },
+  "859": {
+   "name": "Magic longbow",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false
+  },
+  "861": {
+   "name": "Magic shortbow",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false
+  },
+  "863": {
+   "name": "Iron knife",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false,
+   "stackable": true
+  },
+  "864": {
+   "name": "Bronze knife",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false,
+   "stackable": true
+  },
+  "865": {
+   "name": "Steel knife",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false,
+   "stackable": true
+  },
+  "866": {
+   "name": "Mithril knife",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true,
+   "stackable": true
+  },
+  "867": {
+   "name": "Adamant knife",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true,
+   "stackable": true
+  },
+  "868": {
+   "name": "Rune knife",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true,
+   "stackable": true
+  },
+  "882": {
+   "name": "Bronze arrow",
+   "slot": "AMMUNITION",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false,
+   "stackable": true
+  },
+  "884": {
+   "name": "Iron arrow",
+   "slot": "AMMUNITION",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false,
+   "stackable": true
+  },
+  "886": {
+   "name": "Steel arrow",
+   "slot": "AMMUNITION",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false,
+   "stackable": true
+  },
+  "888": {
+   "name": "Mithril arrow",
+   "slot": "AMMUNITION",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false,
+   "stackable": true
+  },
+  "890": {
+   "name": "Adamant arrow",
+   "slot": "AMMUNITION",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false,
+   "stackable": true
+  },
+  "892": {
+   "name": "Rune arrow",
+   "slot": "AMMUNITION",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": false,
+   "stackable": true
+  },
+  "946": {
+   "name": "Knife",
+   "skills": [
+    "FLETCHING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "952": {
+   "name": "Spade",
+   "members": false,
+   "tool": true
+  },
+  "995": {
+   "name": "Coins",
+   "stackable": true,
+   "currency": true
+  },
+  "1079": {
+   "name": "Rune platelegs",
+   "slot": "LEGS",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": false
+  },
+  "1093": {
+   "name": "Rune plateskirt",
+   "slot": "LEGS",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": false
+  },
+  "1099": {
+   "name": "Green d'hide chaps",
+   "slot": "LEGS",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true
+  },
+  "1127": {
+   "name": "Rune platebody",
+   "slot": "BODY",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": false
+  },
+  "1135": {
+   "name": "Green d'hide body",
+   "slot": "BODY",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true
+  },
+  "1163": {
+   "name": "Rune full helm",
+   "slot": "HEAD",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": false
+  },
+  "1201": {
+   "name": "Rune kiteshield",
+   "slot": "SHIELD",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": false
+  },
+  "1215": {
+   "name": "Dragon dagger",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": true
+  },
+  "1265": {
+   "name": "Bronze pickaxe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "MINING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1267": {
+   "name": "Iron pickaxe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "MINING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1269": {
+   "name": "Steel pickaxe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "MINING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1271": {
+   "name": "Adamant pickaxe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "MINING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1273": {
+   "name": "Mithril pickaxe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "MINING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1275": {
+   "name": "Rune pickaxe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "MINING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1305": {
+   "name": "Dragon longsword",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": true
+  },
+  "1319": {
+   "name": "Rune 2h sword",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": false
+  },
+  "1333": {
+   "name": "Rune scimitar",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": false
+  },
+  "1349": {
+   "name": "Iron axe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "WOODCUTTING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1351": {
+   "name": "Bronze axe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "WOODCUTTING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1353": {
+   "name": "Steel axe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "WOODCUTTING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1355": {
+   "name": "Mithril axe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "WOODCUTTING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1357": {
+   "name": "Adamant axe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "WOODCUTTING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1359": {
+   "name": "Rune axe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "WOODCUTTING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1381": {
+   "name": "Staff of air",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "MAGIC"
+   ],
+   "members": false
+  },
+  "1387": {
+   "name": "Staff of fire",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "MAGIC"
+   ],
+   "members": false
+  },
+  "1436": {
+   "name": "Rune essence",
+   "material": "RAW",
+   "skills": [
+    "RUNECRAFT"
+   ]
+  },
+  "1511": {
+   "name": "Logs",
+   "material": "RAW",
+   "skills": [
+    "WOODCUTTING",
+    "FIREMAKING",
+    "FLETCHING"
+   ],
+   "members": false
+  },
+  "1513": {
+   "name": "Magic logs",
+   "material": "RAW",
+   "skills": [
+    "WOODCUTTING",
+    "FIREMAKING",
+    "FLETCHING"
+   ],
+   "members": true
+  },
+  "1515": {
+   "name": "Yew logs",
+   "material": "RAW",
+   "skills": [
+    "WOODCUTTING",
+    "FIREMAKING",
+    "FLETCHING"
+   ],
+   "members": false
+  },
+  "1517": {
+   "name": "Maple logs",
+   "material": "RAW",
+   "skills": [
+    "WOODCUTTING",
+    "FIREMAKING",
+    "FLETCHING"
+   ],
+   "members": true
+  },
+  "1519": {
+   "name": "Willow logs",
+   "material": "RAW",
+   "skills": [
+    "WOODCUTTING",
+    "FIREMAKING",
+    "FLETCHING"
+   ],
+   "members": false
+  },
+  "1521": {
+   "name": "Oak logs",
+   "material": "RAW",
+   "skills": [
+    "WOODCUTTING",
+    "FIREMAKING",
+    "FLETCHING"
+   ],
+   "members": false
+  },
+  "1585": {
+   "name": "Oily fishing rod",
+   "skills": [
+    "FISHING"
+   ],
+   "members": true,
+   "tool": true
+  },
+  "1601": {
+   "name": "Diamond",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": false
+  },
+  "1603": {
+   "name": "Ruby",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": false
+  },
+  "1605": {
+   "name": "Emerald",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": false
+  },
+  "1607": {
+   "name": "Sapphire",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": false
+  },
+  "1609": {
+   "name": "Opal",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": false
+  },
+  "1611": {
+   "name": "Jade",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": false
+  },
+  "1615": {
+   "name": "Dragonstone",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": true
+  },
+  "1617": {
+   "name": "Uncut diamond",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING",
+    "MINING"
+   ],
+   "members": false
+  },
+  "1619": {
+   "name": "Uncut ruby",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING",
+    "MINING"
+   ],
+   "members": false
+  },
+  "1621": {
+   "name": "Uncut emerald",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING",
+    "MINING"
+   ],
+   "members": false
+  },
+  "1623": {
+   "name": "Uncut sapphire",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING",
+    "MINING"
+   ],
+   "members": false
+  },
+  "1625": {
+   "name": "Uncut opal",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING",
+    "MINING"
+   ],
+   "members": false
+  },
+  "1627": {
+   "name": "Uncut jade",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING",
+    "MINING"
+   ],
+   "members": false
+  },
+  "1631": {
+   "name": "Uncut dragonstone",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING",
+    "MINING"
+   ],
+   "members": true
+  },
+  "1704": {
+   "name": "Amulet of glory",
+   "slot": "NECK",
+   "material": "FINISHED",
+   "members": false
+  },
+  "1712": {
+   "name": "Amulet of glory(4)",
+   "slot": "NECK",
+   "material": "FINISHED",
+   "members": false
+  },
+  "1725": {
+   "name": "Amulet of strength",
+   "slot": "NECK",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": false
+  },
+  "1729": {
+   "name": "Amulet of defence",
+   "slot": "NECK",
+   "material": "FINISHED",
+   "members": false
+  },
+  "1731": {
+   "name": "Amulet of power",
+   "slot": "NECK",
+   "material": "FINISHED",
+   "members": false
+  },
+  "1733": {
+   "name": "Needle",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1734": {
+   "name": "Thread",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1735": {
+   "name": "Shears",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1739": {
+   "name": "Cowhide",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING"
+   ]
+  },
+  "1741": {
+   "name": "Leather",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "CRAFTING"
+   ]
+  },
+  "1743": {
+   "name": "Hard leather",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "CRAFTING"
+   ]
+  },
+  "1747": {
+   "name": "Black dragonhide",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": true
+  },
+  "1749": {
+   "name": "Red dragonhide",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": true
+  },
+  "1751": {
+   "name": "Blue dragonhide",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": true
+  },
+  "1753": {
+   "name": "Green dragonhide",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": true
+  },
+  "1755": {
+   "name": "Chisel",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1759": {
+   "name": "Ball of wool",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1775": {
+   "name": "Molten glass",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "CRAFTING"
+   ]
+  },
+  "1781": {
+   "name": "Soda ash",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING"
+   ]
+  },
+  "1783": {
+   "name": "Bucket of sand",
+   "material": "RAW",
+   "skills": [
+    "CRAFTING"
+   ]
+  },
+  "1785": {
+   "name": "Glassblowing pipe",
+   "skills": [
+    "CRAFTING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "1925": {
+   "name": "Bucket",
+   "members": false,
+   "tool": true
+  },
+  "1935": {
+   "name": "Jug",
+   "members": false,
+   "tool": true
+  },
+  "1975": {
+   "name": "Chocolate dust",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": false
+  },
+  "2152": {
+   "name": "Toad's legs",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2347": {
+   "name": "Hammer",
+   "skills": [
+    "SMITHING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "2349": {
+   "name": "Bronze bar",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "SMITHING"
+   ]
+  },
+  "2351": {
+   "name": "Iron bar",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "SMITHING"
+   ]
+  },
+  "2353": {
+   "name": "Steel bar",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "SMITHING"
+   ]
+  },
+  "2355": {
+   "name": "Silver bar",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "SMITHING"
+   ]
+  },
+  "2357": {
+   "name": "Gold bar",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "SMITHING"
+   ]
+  },
+  "2359": {
+   "name": "Mithril bar",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "SMITHING"
+   ]
+  },
+  "2361": {
+   "name": "Adamantite bar",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "SMITHING"
+   ]
+  },
+  "2363": {
+   "name": "Runite bar",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "SMITHING"
+   ]
+  },
+  "2428": {
+   "name": "Attack potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": false
+  },
+  "2430": {
+   "name": "Restore potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": false
+  },
+  "2432": {
+   "name": "Defence potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": false
+  },
+  "2434": {
+   "name": "Prayer potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2436": {
+   "name": "Super attack(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2438": {
+   "name": "Fishing potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2440": {
+   "name": "Super strength(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2442": {
+   "name": "Super defence(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2444": {
+   "name": "Ranging potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2446": {
+   "name": "Antipoison(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2448": {
+   "name": "Superantipoison(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2450": {
+   "name": "Zamorak brew(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2452": {
+   "name": "Antifire potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2481": {
+   "name": "Lantadyme",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2485": {
+   "name": "Grimy lantadyme",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "2497": {
+   "name": "Black d'hide chaps",
+   "slot": "LEGS",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true
+  },
+  "2503": {
+   "name": "Black d'hide body",
+   "slot": "BODY",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true
+  },
+  "2572": {
+   "name": "Ring of wealth",
+   "slot": "RING",
+   "material": "FINISHED",
+   "members": false
+  },
+  "2677": {
+   "name": "Clue scroll (easy)",
+   "tradeable": false,
+   "members": true,
+   "clueReward": true
+  },
+  "2722": {
+   "name": "Clue scroll (hard)",
+   "tradeable": false,
+   "members": true,
+   "clueReward": true
+  },
+  "2801": {
+   "name": "Clue scroll (medium)",
+   "tradeable": false,
+   "members": true,
+   "clueReward": true
+  },
+  "2859": {
+   "name": "Wolf bones",
+   "material": "RAW",
+   "skills": [
+    "PRAYER"
+   ],
+   "members": true
+  },
+  "2970": {
+   "name": "Mort myre fungus",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "2998": {
+   "name": "Toadflax",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "3000": {
+   "name": "Snapdragon",
+   "material": "INTERMEDIATE",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "3008": {
+   "name": "Energy potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": false
+  },
+  "3016": {
+   "name": "Super energy(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "3024": {
+   "name": "Super restore(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "3032": {
+   "name": "Agility potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "3040": {
+   "name": "Magic potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "3049": {
+   "name": "Grimy toadflax",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "3051": {
+   "name": "Grimy snapdragon",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE",
+    "FARMING"
+   ],
+   "members": true
+  },
+  "3138": {
+   "name": "Potato cactus",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "3142": {
+   "name": "Raw karambwan",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": true
+  },
+  "3144": {
+   "name": "Cooked karambwan",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": true
+  },
+  "4089": {
+   "name": "Mystic hat",
+   "slot": "HEAD",
+   "material": "FINISHED",
+   "styles": [
+    "MAGIC"
+   ],
+   "members": true
+  },
+  "4091": {
+   "name": "Mystic robe top",
+   "slot": "BODY",
+   "material": "FINISHED",
+   "styles": [
+    "MAGIC"
+   ],
+   "members": true
+  },
+  "4093": {
+   "name": "Mystic robe bottom",
+   "slot": "LEGS",
+   "material": "FINISHED",
+   "styles": [
+    "MAGIC"
+   ],
+   "members": true
+  },
+  "4151": {
+   "name": "Abyssal whip",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": true
+  },
+  "4202": {
+   "name": "Ring of charos",
+   "slot": "RING",
+   "tradeable": false,
+   "members": true,
+   "questItem": true
+  },
+  "4587": {
+   "name": "Dragon scimitar",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": true
+  },
+  "4694": {
+   "name": "Steam rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": true,
+   "stackable": true,
+   "rune": true
+  },
+  "4695": {
+   "name": "Mist rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": true,
+   "stackable": true,
+   "rune": true
+  },
+  "4696": {
+   "name": "Dust rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": true,
+   "stackable": true,
+   "rune": true
+  },
+  "4697": {
+   "name": "Smoke rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": true,
+   "stackable": true,
+   "rune": true
+  },
+  "4698": {
+   "name": "Mud rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": true,
+   "stackable": true,
+   "rune": true
+  },
+  "4699": {
+   "name": "Lava rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": true,
+   "stackable": true,
+   "rune": true
+  },
+  "4712": {
+   "name": "Ahrim's robetop",
+   "slot": "BODY",
+   "material": "FINISHED",
+   "styles": [
+    "MAGIC"
+   ],
+   "members": true
+  },
+  "4714": {
+   "name": "Ahrim's robeskirt",
+   "slot": "LEGS",
+   "material": "FINISHED",
+   "styles": [
+    "MAGIC"
+   ],
+   "members": true
+  },
+  "4716": {
+   "name": "Dharok's helm",
+   "slot": "HEAD",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": true
+  },
+  "4720": {
+   "name": "Dharok's platebody",
+   "slot": "BODY",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": true
+  },
+  "4722": {
+   "name": "Dharok's platelegs",
+   "slot": "LEGS",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": true
+  },
+  "5289": {
+   "name": "Palm tree seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5291": {
+   "name": "Guam seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5295": {
+   "name": "Ranarr seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5296": {
+   "name": "Toadflax seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5300": {
+   "name": "Snapdragon seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5304": {
+   "name": "Torstol seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5312": {
+   "name": "Acorn",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5313": {
+   "name": "Willow seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5314": {
+   "name": "Maple seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5315": {
+   "name": "Yew seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5316": {
+   "name": "Magic seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5317": {
+   "name": "Spirit seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5321": {
+   "name": "Watermelon seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "5329": {
+   "name": "Secateurs",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true,
+   "tool": true
+  },
+  "5331": {
+   "name": "Watering can",
+   "skills": [
+    "FARMING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "5341": {
+   "name": "Rake",
+   "skills": [
+    "FARMING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "5343": {
+   "name": "Seed dibber",
+   "skills": [
+    "FARMING"
+   ],
+   "members": false,
+   "tool": true
+  },
+  "6332": {
+   "name": "Mahogany logs",
+   "material": "RAW",
+   "skills": [
+    "WOODCUTTING",
+    "FIREMAKING",
+    "FLETCHING"
+   ],
+   "members": true
+  },
+  "6333": {
+   "name": "Teak logs",
+   "material": "RAW",
+   "skills": [
+    "WOODCUTTING",
+    "FIREMAKING",
+    "FLETCHING"
+   ],
+   "members": true
+  },
+  "6529": {
+   "name": "Tokkul",
+   "members": true,
+   "stackable": true,
+   "currency": true
+  },
+  "6570": {
+   "name": "Fire cape",
+   "slot": "CAPE",
+   "material": "FINISHED",
+   "tradeable": false,
+   "members": true,
+   "achievement": true
+  },
+  "6585": {
+   "name": "Amulet of fury",
+   "slot": "NECK",
+   "material": "FINISHED",
+   "members": true
+  },
+  "6685": {
+   "name": "Saradomin brew(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "6693": {
+   "name": "Crushed bird nest",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "6731": {
+   "name": "Seers ring",
+   "slot": "RING",
+   "material": "FINISHED",
+   "styles": [
+    "MAGIC"
+   ],
+   "members": true
+  },
+  "6733": {
+   "name": "Archers ring",
+   "slot": "RING",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true
+  },
+  "6735": {
+   "name": "Warrior ring",
+   "slot": "RING",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": true
+  },
+  "6737": {
+   "name": "Berserker ring",
+   "slot": "RING",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": true
+  },
+  "6739": {
+   "name": "Dragon axe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "WOODCUTTING"
+   ],
+   "members": true,
+   "tool": true
+  },
+  "7462": {
+   "name": "Barrows gloves",
+   "slot": "HANDS",
+   "material": "FINISHED",
+   "tradeable": false,
+   "members": true,
+   "achievement": true
+  },
+  "7936": {
+   "name": "Pure essence",
+   "material": "RAW",
+   "skills": [
+    "RUNECRAFT"
+   ]
+  },
+  "7944": {
+   "name": "Raw monkfish",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": true
+  },
+  "7946": {
+   "name": "Monkfish",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": true
+  },
+  "8007": {
+   "name": "Varrock teleport",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC"
+   ],
+   "members": true,
+   "stackable": false,
+   "teleport": true
+  },
+  "8008": {
+   "name": "Lumbridge teleport",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC"
+   ],
+   "members": true,
+   "stackable": false,
+   "teleport": true
+  },
+  "8009": {
+   "name": "Falador teleport",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC"
+   ],
+   "members": true,
+   "stackable": false,
+   "teleport": true
+  },
+  "8010": {
+   "name": "Camelot teleport",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC"
+   ],
+   "members": true,
+   "stackable": false,
+   "teleport": true
+  },
+  "8011": {
+   "name": "Ardougne teleport",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC"
+   ],
+   "members": true,
+   "stackable": false,
+   "teleport": true
+  },
+  "8012": {
+   "name": "Watchtower teleport",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC"
+   ],
+   "members": true,
+   "stackable": false,
+   "teleport": true
+  },
+  "8013": {
+   "name": "Teleport to house",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC"
+   ],
+   "members": true,
+   "stackable": false,
+   "teleport": true
+  },
+  "8839": {
+   "name": "Void knight top",
+   "slot": "BODY",
+   "material": "FINISHED",
+   "tradeable": false,
+   "members": true,
+   "achievement": true
+  },
+  "8840": {
+   "name": "Void knight robe",
+   "slot": "LEGS",
+   "material": "FINISHED",
+   "tradeable": false,
+   "members": true,
+   "achievement": true
+  },
+  "8842": {
+   "name": "Void knight gloves",
+   "slot": "HANDS",
+   "material": "FINISHED",
+   "tradeable": false,
+   "members": true,
+   "achievement": true
+  },
+  "9075": {
+   "name": "Astral rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": true,
+   "stackable": true,
+   "rune": true
+  },
+  "9144": {
+   "name": "Runite bolts",
+   "slot": "AMMUNITION",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true,
+   "stackable": true
+  },
+  "9739": {
+   "name": "Combat potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "9813": {
+   "name": "Quest point cape",
+   "slot": "CAPE",
+   "material": "FINISHED",
+   "tradeable": false,
+   "members": true,
+   "achievement": true
+  },
+  "11212": {
+   "name": "Dragon arrow",
+   "slot": "AMMUNITION",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true,
+   "stackable": true
+  },
+  "11663": {
+   "name": "Void mage helm",
+   "slot": "HEAD",
+   "material": "FINISHED",
+   "tradeable": false,
+   "members": true,
+   "achievement": true
+  },
+  "11840": {
+   "name": "Dragon boots",
+   "slot": "FEET",
+   "material": "FINISHED",
+   "styles": [
+    "MELEE"
+   ],
+   "members": true
+  },
+  "11875": {
+   "name": "Broad bolts",
+   "slot": "AMMUNITION",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true,
+   "stackable": true
+  },
+  "11905": {
+   "name": "Trident of the seas",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "MAGIC"
+   ],
+   "members": true
+  },
+  "11920": {
+   "name": "Dragon pickaxe",
+   "slot": "WEAPON",
+   "styles": [
+    "MELEE"
+   ],
+   "skills": [
+    "MINING"
+   ],
+   "members": true,
+   "tool": true
+  },
+  "11934": {
+   "name": "Raw dark crab",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": true
+  },
+  "11936": {
+   "name": "Dark crab",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": true
+  },
+  "11951": {
+   "name": "Extended antifire(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "12002": {
+   "name": "Occult necklace",
+   "slot": "NECK",
+   "material": "FINISHED",
+   "styles": [
+    "MAGIC"
+   ],
+   "members": true
+  },
+  "12073": {
+   "name": "Clue scroll (elite)",
+   "tradeable": false,
+   "members": true,
+   "clueReward": true
+  },
+  "12625": {
+   "name": "Stamina potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "12640": {
+   "name": "Amylase crystal",
+   "material": "RAW",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "12695": {
+   "name": "Super combat potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  },
+  "12924": {
+   "name": "Toxic blowpipe",
+   "slot": "WEAPON",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true
+  },
+  "13204": {
+   "name": "Platinum token",
+   "members": true,
+   "stackable": true,
+   "currency": true
+  },
+  "13439": {
+   "name": "Raw anglerfish",
+   "material": "RAW",
+   "skills": [
+    "FISHING",
+    "COOKING"
+   ],
+   "members": true
+  },
+  "13441": {
+   "name": "Anglerfish",
+   "consumable": "FOOD",
+   "material": "FINISHED",
+   "skills": [
+    "COOKING"
+   ],
+   "members": true
+  },
+  "19669": {
+   "name": "Redwood logs",
+   "material": "RAW",
+   "skills": [
+    "WOODCUTTING",
+    "FIREMAKING",
+    "FLETCHING"
+   ],
+   "members": true
+  },
+  "19835": {
+   "name": "Clue scroll (master)",
+   "tradeable": false,
+   "members": true,
+   "clueReward": true
+  },
+  "21295": {
+   "name": "Infernal cape",
+   "slot": "CAPE",
+   "material": "FINISHED",
+   "tradeable": false,
+   "members": true,
+   "achievement": true
+  },
+  "21326": {
+   "name": "Amethyst arrow",
+   "slot": "AMMUNITION",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true,
+   "stackable": true
+  },
+  "21486": {
+   "name": "Teak seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "21488": {
+   "name": "Mahogany seed",
+   "material": "RAW",
+   "skills": [
+    "FARMING"
+   ],
+   "members": true
+  },
+  "21880": {
+   "name": "Wrath rune",
+   "material": "FINISHED",
+   "skills": [
+    "MAGIC",
+    "RUNECRAFT"
+   ],
+   "members": true,
+   "stackable": true,
+   "rune": true
+  },
+  "21905": {
+   "name": "Dragon bolts",
+   "slot": "AMMUNITION",
+   "material": "FINISHED",
+   "styles": [
+    "RANGED"
+   ],
+   "members": true,
+   "stackable": true
+  },
+  "23685": {
+   "name": "Divine super combat potion(4)",
+   "consumable": "POTION",
+   "material": "FINISHED",
+   "skills": [
+    "HERBLORE"
+   ],
+   "members": true
+  }
+ }
+}
